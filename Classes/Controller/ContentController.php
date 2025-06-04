@@ -24,13 +24,13 @@ class ContentController extends ActionController
     /**
      * Render the content Element via ExtBase.
      */
-    public function indexAction(): string
+    public function indexAction(): \Psr\Http\Message\ResponseInterface
     {
         try {
             $extensionKey = $this->settings['extensionKey'];
             $vendorName = $this->settings['vendorName'];
             $name = $this->settings['contentElement'];
-            $data = $this->configurationManager->getContentObject()->data;
+            $data = $this->request->getAttribute('currentContentObject')->data;
 
             $targetObject = ClassNamingUtility::getFqnByPath($vendorName, $extensionKey, 'Domain/Model/Content/' . $name);
             $model = ModelUtility::getModel($targetObject, $data);
@@ -57,7 +57,7 @@ class ContentController extends ActionController
             ];
             if (!empty($dataProcessingAsTyposcriptArray)) {
                 $variables = $contentDataProcessor->process(
-                    $this->configurationManager->getContentObject(),
+                    $this->request->getAttribute('currentContentObject'),
                     ['dataProcessing.' => $dataProcessingAsTyposcriptArray],
                     ['data' => $data]
                 );
@@ -90,9 +90,9 @@ class ContentController extends ActionController
                 $variables
             );
 
-            return $view->render();
+            return $this->htmlResponse($view->render());
         } catch (\Exception $ex) {
-            return 'Exception in content rendering: ' . $ex->getMessage();
+            return $this->htmlResponse('Exception in content rendering: ' . $ex->getMessage());
         }
     }
 }

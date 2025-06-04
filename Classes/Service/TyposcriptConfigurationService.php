@@ -64,7 +64,7 @@ class TyposcriptConfigurationService implements SingletonInterface
         }
         ++$this->nLevels[array_key_last($this->nLevels)];
         if ($this->nLevels[array_key_last($this->nLevels)] > 10) {
-            throw new \RuntimeException('More then 10 levels of recursion. Does this code really work?');
+            throw new \RuntimeException('More then 10 levels of recursion. Does this code really work?', 6996836594);
             // return [];
         }
         $this->alreadySerializedCache[array_key_last($this->alreadySerializedCache)][] = $modelClassName;

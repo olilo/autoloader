@@ -63,8 +63,8 @@ class Language implements DataSetInterface
                         'default' => 0,
                         'items' => [
                             [
-                                '',
-                                0,
+                                'label' => '',
+                                'value' => 0,
                             ],
                         ],
                         'foreign_table' => $tableName,

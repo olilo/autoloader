@@ -39,7 +39,11 @@ class FileReferenceMapper implements MapperInterface
         return [
             'exclude' => 1,
             'label' => $overWriteLabel ?: $fieldName,
-            'config' => ExtensionManagementUtility::getFileFieldTCAConfig($fieldName, ['maxitems' => 1]),
+            'config' => [
+                ### !!! Watch out for fieldName different from columnName
+                'type' => 'file',
+                'maxitems' => 1,
+            ],
         ];
     }
 

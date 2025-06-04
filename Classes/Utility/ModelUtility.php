@@ -175,7 +175,7 @@ class ModelUtility
 
         // Note: Change TYPO3_MODE if extension is TYPO3 >= v11 only
         // https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/11.0/Deprecation-92947-DeprecateTYPO3_MODEAndTYPO3_REQUESTTYPEConstants.html#typo3-mode-and-typo3-requesttype-usages-in-class-files
-        if (TYPO3_MODE === 'BE') {
+        if (\TYPO3\CMS\Core\Http\ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()) {
             GeneralUtility::makeInstance(Session::class)->destroy();
             $settings->setIgnoreEnableFields(true);
 

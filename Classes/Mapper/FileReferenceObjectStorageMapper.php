@@ -39,7 +39,10 @@ class FileReferenceObjectStorageMapper implements MapperInterface
         return [
             'exclude' => 1,
             'label' => $overWriteLabel ?: $fieldName,
-            'config' => ExtensionManagementUtility::getFileFieldTCAConfig($fieldName),
+            'config' => [
+                ### !!! Watch out for fieldName different from columnName
+                'type' => 'file',
+            ],
         ];
     }
 

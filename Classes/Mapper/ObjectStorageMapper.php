@@ -64,7 +64,7 @@ class ObjectStorageMapper implements MapperInterface
         $braceStartPos = strpos($type, '<');
         $braceEndPos = strpos($type, '>');
         if (false === $braceStartPos || false === $braceEndPos) {
-            throw new \RuntimeException('The ObjectStorage needs to have a template type!');
+            throw new \RuntimeException('The ObjectStorage needs to have a template type!', 7896892871);
         }
         $objectStorageTemplateClassType = (new \ReflectionClass(substr($type, $braceStartPos + 1, $braceEndPos - $braceStartPos - 1)))->getName();
         $objectStorageTemplateTableName = ModelUtility::getTableName($objectStorageTemplateClassType);

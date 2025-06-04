@@ -10,16 +10,15 @@
 $EM_CONF[$_EXTKEY] = [
     'title'            => 'Autoloader',
     'description'      => 'Automatic components loading of ExtBase extensions to get more time for coffee in the company ;) This ext is not a PHP SPL autoloader or class loader - it is better! Loads CommandController, Xclass, Hooks, FlexForms, Slots, TypoScript, TypeConverter, BackendLayouts and take care of createing needed templates, TCA configuration or translations at the right location.',
-    'version' => '7.4.6',
+    'version'          => '8.0.0',
     'state'            => 'stable',
-    'clearCacheOnLoad' => true,
     'author'           => 'Tim Lochmüller',
     'author_email'     => 'tim.lochmueller@hdnet.de',
     'author_company'   => 'hdnet.de',
     'constraints'      => [
         'depends' => [
-            'php'   => '7.4.0-8.99.99',
-            'typo3' => '11.5.0-12.4.99',
+            'php'   => '8.2.0-8.2.99',
+            'typo3' => '12.4.0-12.4.99',
         ],
     ],
 ];

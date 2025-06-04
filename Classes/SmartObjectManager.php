@@ -79,8 +79,8 @@ class SmartObjectManager implements SingletonInterface
         $register = SmartObjectRegister::getRegister();
 
         $baseTemplatePath = ExtensionManagementUtility::extPath('autoloader', 'Resources/Private/Templates/TcaFiles/');
-        $defaultTemplate = GeneralUtility::getUrl($baseTemplatePath . 'Default.tmpl');
-        $overrideTemplate = GeneralUtility::getUrl($baseTemplatePath . 'Override.tmpl');
+        $defaultTemplate = @file_get_contents($baseTemplatePath . 'Default.tmpl');
+        $overrideTemplate = @file_get_contents($baseTemplatePath . 'Override.tmpl');
 
         $search = [
             '__modelName__',

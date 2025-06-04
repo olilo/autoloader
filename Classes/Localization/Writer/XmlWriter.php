@@ -67,7 +67,7 @@ class XmlWriter extends AbstractLocalizationWriter
         if (0 === mb_strlen($extensionKey)) {
             return;
         }
-        if (GeneralUtility::isFirstPartOfStr($key, 'LLL:')) {
+        if (\str_starts_with($key, 'LLL:')) {
             return;
         }
         $absolutePath = $this->getAbsoluteFilename($extensionKey);

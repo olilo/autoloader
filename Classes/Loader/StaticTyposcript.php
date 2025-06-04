@@ -64,7 +64,7 @@ class StaticTyposcript implements TcaLoaderInterface
     {
     }
 
-    public function loadTcaConfiguration(Loader $loader, array $loaderInformation, string $extensionKey, string $tableName)
+    public function loadTcaConfiguration(Loader $loader, array $loaderInformation, string $extensionKey, string $tableName): void
     {
         if ($tableName !== 'sys_template') {
             return;

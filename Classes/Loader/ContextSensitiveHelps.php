@@ -59,9 +59,6 @@ class ContextSensitiveHelps implements LoaderInterface
      */
     public function loadExtensionTables(Loader $loader, array $loaderInformation): void
     {
-        foreach ($loaderInformation as $table => $path) {
-            ExtensionManagementUtility::addLLrefForTCAdescr($table, $path);
-        }
     }
 
     /**

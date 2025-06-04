@@ -6,7 +6,7 @@
  * @author   Tim Lochmüller
  */
 // Note: Drop TYPO3_MODE if extension is TYPO3 >= v11 only
-defined('TYPO3_MODE') or defined('TYPO3') or die();
+defined('TYPO3') or die();
 
 \HDNET\Autoloader\Loader::extLocalconf('HDNET', 'autoloader', [
     'Hooks',
