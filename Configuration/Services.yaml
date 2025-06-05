@@ -5,3 +5,8 @@ services:
         identifier: 'autoloader/databaseListener'
         method: 'triggerEvent'
         event: TYPO3\CMS\Core\Database\Event\AlterTableDefinitionStatementsEvent
+  HDNET\Autoloader\Listener\ElementBackendPreviewListener:
+    tags:
+      - name: event.listener
+        identifier: 'autoloader/elementBackendPreviewListener'
+        event: TYPO3\CMS\Backend\View\Event\PageContentPreviewRenderingEvent

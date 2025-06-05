@@ -1,40 +1,20 @@
 <?php
 
-/**
- * Custom Backend Preview for Elements like Content Objects.
- */
-declare(strict_types=1);
+namespace HDNET\Autoloader\Listener;
 
-namespace HDNET\Autoloader\Hooks;
-
-use HDNET\Autoloader\Annotation\Hook;
 use HDNET\Autoloader\Utility\ExtendedUtility;
 use HDNET\Autoloader\Utility\ModelUtility;
-use TYPO3\CMS\Backend\View\PageLayoutView;
-use TYPO3\CMS\Backend\View\PageLayoutViewDrawItemHookInterface;
+use TYPO3\CMS\Backend\View\Event\PageContentPreviewRenderingEvent;
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * Class ElementBackendPreview.
- *
- * @see  \TYPO3\CMS\Backend\View\PageLayoutView::tt_content_drawItem
- * @Hook("TYPO3_CONF_VARS|SC_OPTIONS|cms/layout/class.tx_cms_layout.php|tt_content_drawItem")
- */
-class ElementBackendPreview implements PageLayoutViewDrawItemHookInterface
+class ElementBackendPreviewListener
 {
-    /**
-     * Preprocesses the preview rendering of a content element.
-     *
-     * @param PageLayoutView $parentObject  Calling parent object
-     * @param bool           $drawItem      Whether to draw the item using the default functionalities
-     * @param string         $headerContent Header content
-     * @param string         $itemContent   Item content
-     * @param array          $row           Record row of tt_content
-     */
-    public function preProcess(PageLayoutView &$parentObject, &$drawItem, &$headerContent, &$itemContent, array &$row): void
+    public function __invoke(PageContentPreviewRenderingEvent $event): void
     {
+        $row = $event->getRecord();
+
         if (!$this->isAutoloaderContentobject($row)) {
             return;
         }
@@ -43,8 +23,7 @@ class ElementBackendPreview implements PageLayoutViewDrawItemHookInterface
             return;
         }
 
-        $itemContent = $this->getBackendPreview($row);
-        $drawItem = false;
+        $event->setPreviewContent($this->getBackendPreview($row));
     }
 
     /**
@@ -52,9 +31,9 @@ class ElementBackendPreview implements PageLayoutViewDrawItemHookInterface
      *
      * @param mixed[] $row
      *
-     * @return mixed|string
+     * @return string
      */
-    public function getBackendPreview(array $row)
+    public function getBackendPreview(array $row): string
     {
         if (!$this->hasBackendPreview($row)) {
             return '';
